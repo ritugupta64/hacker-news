@@ -1,0 +1,21 @@
+.header{
+    background-color: #ff6600;
+    margin: 0 2rem;
+    display: flex;
+    font-size:14px;
+    color: #fff;
+    align-items: center;
+    padding: .25rem;
+    &__img{
+        border: 1px solid #fff;
+    }
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
+    h1{
+        padding: 0px;
+        font-size:14px;
+        margin-left: .5rem;
+    }
+}
