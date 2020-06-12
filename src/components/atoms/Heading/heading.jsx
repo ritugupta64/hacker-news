@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './heading.scss'
 
@@ -12,6 +13,10 @@ export const Heading = ({ children, variation, headingtype }) => {
       {children}
     </HeadingElement>
   )
+}
+
+Heading.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 Heading.defaultProps = {

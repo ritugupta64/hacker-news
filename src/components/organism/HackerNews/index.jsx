@@ -48,9 +48,9 @@ export const HackerNews = () => {
           type="button"
           disabled={loadItems === 1}
           onClick={() => setLoadItems(loadItems - 1)}
-          className="btn-container__btn"
+          className={`btn-container__btn ${loadItems === 1 ? 'disabled' : null}`}
         >
-          Previous &nbsp;|
+          Previous
         </button>
         <button
           type="button"

@@ -1,14 +1,23 @@
-.btn-container{
-    display: flex;
-    margin: 10px 0px;
-    justify-content: center;
-  &__btn{
-    color: #ff6600;
+@import '../../../styles/variable.scss';
+
+.btn-container {
+  display: flex;
+  margin: 10px 0px;
+  justify-content: center;
+  &__btn {
+    color: $orangeColor;
     background: none;
     border: none;
     display: inline-block;
     font-size: 16px;
     line-height: 20px;
     padding: 5px;
-}
+    &:first-child:after{
+      content: '|';
+      padding-left: 10px;
+    }
+    &.disabled{
+      opacity: .5;
+    }
+  }
 }

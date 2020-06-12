@@ -6,8 +6,6 @@ import { Loader } from '../../atoms/Loader/Loader'
 
 import { GlobalContext } from '../../../store/context'
 
-import './hackerNewsListing.scss'
-
 export const HackerNewsListing = ({ news, hide }) => {
   const { state } = useContext(GlobalContext)
 
@@ -42,4 +40,5 @@ export const HackerNewsListing = ({ news, hide }) => {
 
 HackerNewsListing.propTypes = {
   news: PropTypes.array,
+  hide: PropTypes.func
 }

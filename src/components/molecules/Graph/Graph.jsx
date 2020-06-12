@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import {
   Chart,
   Series,
@@ -7,9 +9,11 @@ import {
   Label,
 } from 'devextreme-react/chart'
 
-const Graph = ({graphData}) => {
+import './graph.scss'
+
+const Graph = ({ graphData }) => {
   return (
-    <React.Fragment>
+    <div className="graph">
       <Chart id="chart" dataSource={graphData} title="News Graph">
         <Series argumentField="objectID" />
         <ArgumentAxis>
@@ -17,8 +21,13 @@ const Graph = ({graphData}) => {
         </ArgumentAxis>
         <Legend visible={false} />
       </Chart>
-    </React.Fragment>
+      <span className="graph__id">Id</span>
+    </div>
   )
 }
 
 export default Graph
+
+Graph.propTypes = {
+  graphData: PropTypes.shape()
+}

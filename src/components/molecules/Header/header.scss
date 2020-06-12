@@ -1,14 +1,13 @@
+@import '../../../styles/variable.scss';
+
 .header {
-  background-color: #ff6600;
+  background-color: $orangeColor;
   display: flex;
   font-size: 14px;
-  color: #fff;
+  color: $whiteColor;
   align-items: center;
   padding: 0.25rem;
-  &__comments {
-    flex: 2;
-  }
-  &__vote-count {
+  &__comments, &__vote-count {
     flex: 2;
   }
   &__up-vote {

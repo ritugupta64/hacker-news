@@ -64,13 +64,4 @@ const timeStampConvertor = (date) => {
     return `${Math.floor(seconds)} seconds`;
   };
 
-  const isInternalURL = (to) => {
-    try {
-      const url = new URL(to, window.location.origin);
-      return url.hostname === window.location.hostname;
-    } catch {
-      return false;
-    }
-  };
-
-export { fetchWrapper, getDomain, isInternalURL, timeStampConvertor };
+export { fetchWrapper, getDomain, timeStampConvertor };
