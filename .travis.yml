@@ -1,0 +1,19 @@
+language: node_js
+node_js: "stable"
+sudo: false
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github-token: $GITHUB_TOKEN
+  local_dir: "out"
+  on:
+    branch: develop
+env:
+  matrix:
+    secure: $GITHUB_TOKEN
+notifications:
+  email:
+    - gritu64@gmail.com
+cache:
+  directories:
+  - node_modules
