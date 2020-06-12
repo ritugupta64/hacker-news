@@ -1,30 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders 1`] = `
-<DocumentFragment>
-  <header
-    class="header"
-  >
-    <div
-      class="header__comments"
-    >
-      Comments
-    </div>
-    <div
-      class="header__vote-count"
-    >
-      Vote count
-    </div>
-    <div
-      class="header__up-vote"
-    >
-      Up vote
-    </div>
-    <div
-      class="header__news-details"
-    >
-      News Details
-    </div>
-  </header>
-</DocumentFragment>
-`;
+exports[`renders 1`] = `<DocumentFragment />`;

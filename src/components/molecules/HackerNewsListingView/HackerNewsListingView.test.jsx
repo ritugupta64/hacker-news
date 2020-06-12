@@ -49,7 +49,7 @@ describe('render a view component', () => {
     )
   })
 
-  it('should have all valid classes', () => {
+  it('should hide the item to click on hide button', () => {
     const { container } = result
     fireEvent.click(container.querySelector('.article__btn-hide'))
     expect(hideItem).toHaveBeenCalled()
@@ -62,6 +62,15 @@ describe('render a view component', () => {
       </GlobalContextProvider>
     )
     expect(container.querySelector('.odd')).toBeTruthy()
+  })
+
+  it('if index is 2 then class name should be odd', () => {
+    const { container } = render(
+      <GlobalContextProvider data={{ state: initialState, dispatch }}>
+        <HackerNewsListingView newsView={news} hideItem={hideItem} index={2} />
+      </GlobalContextProvider>
+    )
+    expect(container.querySelector('.even')).toBeTruthy()
   })
 
   it('should have all valid classes', () => {

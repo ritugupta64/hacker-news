@@ -3,7 +3,6 @@ import { render } from '@testing-library/react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import {GlobalContextProvider} from './store/context'
-import {Header} from './components/molecules/Header/Header'
 import {HackerRank} from './components/organism/HackerNews'
 
 const dispatch = jest.fn()
@@ -16,12 +15,6 @@ it('renders', () => {
   const { asFragment } = render(
     <GlobalContextProvider data={{ state: initialState, dispatch }}>
       <BrowserRouter>
-        <Header
-          comments="Comments"
-          voteCount="Vote count"
-          upVote="Up vote"
-          newsDetails="News Details"
-        />
         <Switch>
           <Route exact path="/" component={HackerRank} />
         </Switch>

@@ -26,7 +26,7 @@ const news = [
 
 const hide = jest.fn()
 
-describe('not render a list if data is not found', () => {
+describe('Hacker news listing component', () => {
   let result
   beforeEach(() => {
     result = render(
@@ -38,12 +38,12 @@ describe('not render a list if data is not found', () => {
  
   afterEach(cleanup)
 
-  it('should have a loader class', () => {
+  it('should have a loader class if news does not have data', () => {
     const { container } = result
     expect(container.querySelector('.loader')).toBeTruthy()
   })
 
-  it('should have a listing when data is avaialable', () => {
+  it('should have a listing when data is available', () => {
     const { container } =  render(
         <GlobalContextProvider data={{ state: initialState, dispatch }}>
           <HackerNewsListing news={news} hide={news} />
