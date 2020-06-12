@@ -2,8 +2,8 @@
 
 .btn-container {
   display: flex;
-  margin: 10px 0px;
-  justify-content: center;
+  margin: 10px 10px;
+  justify-content: flex-end;
   &__btn {
     color: $orangeColor;
     background: none;
