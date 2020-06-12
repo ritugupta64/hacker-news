@@ -1,19 +1,46 @@
 .article {
   color: #828282;
-  &__details {
-      font-size: 10px;
+  display: flex;
+  font-size: 14px;
+  padding: 10px 5px;
+
+  &__up-vote {
+    display: inline-block;
+    margin-right: 5px;
+    flex: 1;
   }
-  address{
-      display: inline-block;
-      font-style: normal;
+  &__comments {
+    flex: 2;
+  }
+  &__points {
+    flex: 2;
+    color: #ff6600;
+  }
+  &__creation-details {
+    flex: 10;
+  }
+  &__external-url a{
+    color: #828282;
+    text-decoration: none;
+  }
+  address {
+    display: inline-block;
+    font-style: normal;
+    color: #000;
   }
   h2 {
     font-size: 14px;
+    display: inline-block;
   }
-  button{
-      border: none;
-      background: none;
-      color: #828282;
-      font-size:10px;
+  button {
+    border: none;
+    background: none;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  &.odd{
+    background-color: #efefef;
   }
 }
+

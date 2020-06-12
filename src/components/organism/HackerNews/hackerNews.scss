@@ -1,0 +1,14 @@
+.btn-container{
+    display: flex;
+    margin: 10px 0px;
+    justify-content: center;
+  &__btn{
+    color: #ff6600;
+    background: none;
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 5px;
+}
+}

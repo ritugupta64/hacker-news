@@ -1,63 +1,93 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { getDomain, timeStampConvertor } from '../../../utils'
 import { Heading } from '../../atoms/Heading/heading'
+import { GlobalContext } from '../../../store/context'
+import { getUpVotedItem } from '../../../store/action'
 
 import './hackerNewsListingView.scss'
 
-export const HackerNewsListingView = ({ newsView, hideItem, upVote }) => {
-
+export const HackerNewsListingView = ({
+  newsView,
+  hideItem,
+  upVote,
+  index,
+}) => {
+  const { state, dispatch } = useContext(GlobalContext)
+  const { upvotedItem } = state
   const { title, created_at, num_comments, url, points, author } = newsView
+
+  const upvoteNewsItem = (newsView) => {
+    const newList = [...upvotedItem]
+    const index = newList.findIndex(
+      (item) => item.objectID === newsView.objectID
+    )
+    if (index >= 0) {
+      newList.splice(index, 1)
+    } else {
+      newList.push(newsView)
+    }
+
+    getUpVotedItem(newList, dispatch)
+  }
+
   return (
-    <article className="article">
-      <HackerNewsListingView.Title title={title} url={url} />
+    <article className={`article ${index % 2 === 0 ? 'even' : 'odd'}`}>
+      <span className="article__comments">
+        {num_comments ? num_comments : 0}
+      </span>
+
+      <span className="article__points">{points ? points : 0}</span>
+
+      <button
+        className="article__up-vote"
+        onClick={() => upvoteNewsItem(newsView)}
+      >
+        {upVote}
+      </button>
+
       <HackerNewsListingView.Summary
         created_at={created_at}
-        num_comments={num_comments}
-        points={points}
         author={author}
         hideItem={hideItem}
-        upVote = {upVote}
+        title={title}
+        url={url}
       />
     </article>
   )
 }
 
-const Title = ({ title, url }) => {
+const Summary = ({ created_at, author, hideItem, title, url }) => {
   return (
-    <Heading headingtype = "h2">
-      {title && title} {url ? (<a href={url} rel="noopener noreferrer" target="_blank">({getDomain(url)})</a>) : null}
-    </Heading>
-  )
-}
+    <div className="article__creation-details">
+      <Heading headingtype="h2">{title}&nbsp;</Heading>
 
-Title.propTypes = {
-  title: PropTypes.string,
-  url: PropTypes.string,
-}
-
-const Summary = ({ created_at, num_comments, points, author, objectID, hideItem, upVote }) => {
-  return (
-    <div className="article__details">
-     
-      <address>
-        {points ? `${points} points` : 0} by {author && author}
-        <span onClick={() => upVote(objectID)} style={{display:'inlineBlock', padding: '5px', border: '1px solid red'}}>test</span>
-      </address>
-      <time>{created_at && timeStampConvertor(created_at)} </time>
-      <button type="button" onClick={hideItem}>| hide |</button>
-      <small>{`${num_comments ? num_comments : 0} comments`}</small>
+      <small className="article__external-url">
+        <a href={url} rel="noopener noreferrer" target="_blank">
+          ({getDomain(url)})
+        </a>
+      </small>
+      <address className="article__author">&nbsp;by {author}</address>
+      <time className="article__date"> {timeStampConvertor(created_at)}</time>
+      <button className="article__btn-hide" type="button" onClick={hideItem}>
+        &nbsp;[ hide ]
+      </button>
     </div>
   )
 }
+HackerNewsListingView.Summary = Summary
 
-Summary.propTypes = {
-  created_at: PropTypes.string,
+HackerNewsListingView.propTypes = {
+  newsView: PropTypes.shape({
+    created_at: PropTypes.string,
+    author: PropTypes.string,
+    title: PropTypes.string,
+    url: PropTypes.string,
+  }),
+  hideItem: PropTypes.func,
+  upVote: PropTypes.string,
+  index: PropTypes.number,
   num_comments: PropTypes.number,
   points: PropTypes.number,
-  author: PropTypes.string,
 }
-
-HackerNewsListingView.Title = Title
-HackerNewsListingView.Summary = Summary

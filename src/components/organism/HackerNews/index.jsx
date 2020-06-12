@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 // import { fetchWrapper } from "../../utils";
-import { NEWS_HACKER } from '../../../API'
+// import { NEWS_HACKER } from '../../../API'
 import { HackerNewsListing } from '../../molecules/HackerNewsListing/HackerNewsListing'
-// import { GlobalContext } from '../../../store/context'
-// import { getHideItems } from '../../../store/action'
+import { GlobalContext } from '../../../store/context'
+import Graph from '../../molecules/Graph/Graph'
 
 import './hackerNews.scss'
 
 export const HackerNews = () => {
-  // const { dispatch } = useContext(GlobalContext)
+  const { state } = useContext(GlobalContext)
+  const { page } = state
+
   const [hits, sethits] = useState([])
-  
+  const [loadItems, setLoadItems] = useState(page)
 
   // const fetchURL = () => {
   //     const url = fetchWrapper(NEWS_HACKER)
@@ -19,32 +21,46 @@ export const HackerNews = () => {
   // };
 
   useEffect(() => {
-    fetch(NEWS_HACKER)
+    fetch(`http://hn.algolia.com/api/v1/search?page=${loadItems}`)
       .then((res) => res.json())
       .then((data) => {
         sethits(data?.hits)
       })
-  }, [])
+  }, [loadItems])
 
   const hide = (id) => {
     const hideItem = hits.filter((itm) => itm.objectID !== id)
     sethits(hideItem)
   }
 
-
-  const upVote = (id) => {
-    const upVoteItem = hits.map((itm) => {
-      if(itm.objectID === id){
-        itm.points++
+  const resultId = hits && hits.map((obj) => {  
+    return {
+        objectID: Object.values(obj.objectID).join(''),
+        val : obj.points
       }
-      return itm
-    })
-    console.log(upVoteItem, 'test')
-   sethits(upVoteItem)
-  }
+  });
 
-    // const storedIn = localStorage.setItem('hide', JSON.stringify(id))
-    // const getIn = JSON.parse(localStorage.getItem('hide'))
-
-  return <HackerNewsListing news={hits} hide={hide} upVote={upVote} />
+  return (
+    <>
+      <HackerNewsListing news={hits} hide={hide} />
+      <div className="btn-container">
+        <button
+          type="button"
+          disabled={loadItems === 1}
+          onClick={() => setLoadItems(loadItems - 1)}
+          className="btn-container__btn"
+        >
+          Previous &nbsp;|
+        </button>
+        <button
+          type="button"
+          onClick={() => setLoadItems(loadItems + 1)}
+          className="btn-container__btn"
+        >
+          Next
+        </button>
+      </div>
+      <Graph graphData={resultId} />
+    </>
+  )
 }
