@@ -6,7 +6,6 @@ import {GlobalContextProvider} from './store/context'
 import {Header} from './components/molecules/Header/Header'
 import {HackerRank} from './components/organism/HackerNews'
 
-let result
 const dispatch = jest.fn()
 
 const initialState = {

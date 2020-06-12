@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { getDomain, timeStampConvertor } from '../../../utils'
-import { Heading } from '../../atoms/Heading/heading'
+import { Heading } from '../../atoms/Heading/Heading'
 import { GlobalContext } from '../../../store/context'
 import { getUpVotedItem } from '../../../store/action'
 
@@ -79,12 +79,12 @@ const Summary = ({ created_at, author, hideItem, title, url }) => {
 HackerNewsListingView.Summary = Summary
 
 HackerNewsListingView.propTypes = {
-  newsView: PropTypes.shape({
+  newsView: PropTypes.arrayOf(PropTypes.shape({
     created_at: PropTypes.string,
     author: PropTypes.string,
     title: PropTypes.string,
     url: PropTypes.string,
-  }),
+  })),
   hideItem: PropTypes.func,
   upVote: PropTypes.string,
   index: PropTypes.number,
