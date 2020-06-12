@@ -4,11 +4,11 @@
   color: $textColor;
   display: flex;
   font-size: 14px;
-  padding: 10px 5px;
+  padding: .75rem .5rem;
 
   &__up-vote {
-    display: inline-block;
     margin-right: 5px;
+    display: flex;
     flex: 1;
   }
   &__comments {
