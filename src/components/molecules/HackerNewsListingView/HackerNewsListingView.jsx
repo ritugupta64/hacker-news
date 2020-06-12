@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { getDomain, timeStampConvertor } from '../../../utils'
-import { Heading } from '../../atoms/Heading/Heading'
+import { Heading } from '../../atoms/Heading/heading'
 import { GlobalContext } from '../../../store/context'
 import { getUpVotedItem } from '../../../store/action'
 
