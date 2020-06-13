@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
+import ChartistGraph from 'react-chartist'
 
-// import { fetchWrapper } from "../../utils";
-// import { NEWS_HACKER } from '../../../API'
+import { HACKER_NEWS } from '../../../API'
 import { HackerNewsListing } from '../../molecules/HackerNewsListing/HackerNewsListing'
 import { GlobalContext } from '../../../store/context'
-import Graph from '../../molecules/Graph/Graph'
 import { Header } from '../../molecules/Header/Header'
 
 import './hackerNews.scss'
@@ -16,14 +15,14 @@ export const HackerNews = () => {
   const [hits, sethits] = useState([])
   const [loadItems, setLoadItems] = useState(page)
 
-  // const fetchURL = () => {
-  //     const url = fetchWrapper(NEWS_HACKER)
-  //     setData(url)
-  // };
-
   useEffect(() => {
-    fetch(`http://hn.algolia.com/api/v1/search?page=${loadItems}`)
-      .then((res) => res.json())
+    fetch(`${HACKER_NEWS}?page=${loadItems}`)
+      .then(function (response) {
+        if (response.status >= 400) {
+          throw new Error('Bad response from server')
+        }
+        return response.json()
+      })
       .then((data) => {
         sethits(data?.hits)
       })
@@ -34,14 +33,24 @@ export const HackerNews = () => {
     sethits(hideItem)
   }
 
-  const resultId =
-    hits &&
-    hits.map((obj) => {
-      return {
-        objectID: Object.values(obj.objectID).join(''),
-        val: obj.points,
-      }
-    })
+  var type = 'Line'
+
+  const labels = hits.map((item) => item.objectID)
+  const series = hits.map((itm) => itm.points)
+
+  let graphData = {
+    labels: labels,
+    series: [series],
+  }
+
+  var options = {
+    high: series,
+    axisX: {
+      labelInterpolationFnc: function (value, index) {
+        return index % 2 === 0 ? value : null
+      },
+    },
+  }
 
   return (
     <>
@@ -71,7 +80,7 @@ export const HackerNews = () => {
           Next
         </button>
       </div>
-      <Graph graphData={resultId} />
+      <ChartistGraph data={graphData} options={options} type={type} />
     </>
   )
 }

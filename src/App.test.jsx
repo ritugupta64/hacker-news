@@ -11,7 +11,7 @@ const initialState = {
   character: [],
 }
 
-it('renders', () => {
+it('match snapshot', () => {
   const { asFragment } = render(
     <GlobalContextProvider data={{ state: initialState, dispatch }}>
       <BrowserRouter>
