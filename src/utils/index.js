@@ -1,32 +1,7 @@
-// import fetch from 'isomorphic-fetch'
 
-function fetchOptions(options) {
-  const { method, headers, body } = options || {};
+import React from 'react'
+import fetch from 'isomorphic-fetch'
 
-  const defaultHeaders = {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-    "Accept-Encoding": "gzip, compress",
-  };
-  return {
-    method: method || "GET",
-    headers: {
-      ...defaultHeaders,
-      ...headers,
-    },
-    body: JSON.stringify(body) || null,
-  };
-}
-
-async function fetchWrapper(path, options) {
-  const optionObj = fetchOptions(options);
-  return new Promise((resolve) => {
-    fetch(path, optionObj)
-      .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch((error) => console.log("logged error"));
-  });
-}
 
 const getDomain = (url) => {
   return (
@@ -64,4 +39,23 @@ const timeStampConvertor = (date) => {
     return `${Math.floor(seconds)} seconds`;
   };
 
-export { fetchWrapper, getDomain, timeStampConvertor };
+  const useFetch = (url, options) => {
+    const [response, setResponse] = React.useState(null);
+    const [error, setError] = React.useState(null);
+    
+    React.useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await fetch(url, options);
+          const json = await res.json();
+          setResponse(json);
+        } catch (error) {
+          setError(error);
+        }
+      };
+      fetchData();
+    }, []);
+    return { response, error };
+  };
+
+export { getDomain, timeStampConvertor, useFetch };
