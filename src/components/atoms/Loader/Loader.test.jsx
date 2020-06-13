@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import {Loader} from './Loader'
+import {Loader} from '.'
 
 describe('render a Loader', () => {
   let result

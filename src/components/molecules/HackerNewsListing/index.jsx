@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { HackerNewsListingView } from '../HackerNewsListingView/HackerNewsListingView'
-import { Loader } from '../../atoms/Loader/Loader'
+import { HackerNewsListingView } from '../HackerNewsListingView'
+import { Loader } from '../../atoms/Loader'
 
 import { GlobalContext } from '../../../store/context'
 
@@ -40,5 +40,5 @@ export const HackerNewsListing = ({ news, hide }) => {
 
 HackerNewsListing.propTypes = {
   news: PropTypes.array,
-  hide: PropTypes.func
+  hide: PropTypes.func,
 }

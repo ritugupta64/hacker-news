@@ -16,7 +16,7 @@ export const Heading = ({ children, variation, headingtype }) => {
 }
 
 Heading.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 Heading.defaultProps = {

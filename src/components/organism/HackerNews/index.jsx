@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react'
 import ChartistGraph from 'react-chartist'
 
 import { HACKER_NEWS } from '../../../API'
-import { HackerNewsListing } from '../../molecules/HackerNewsListing/HackerNewsListing'
+import { HackerNewsListing } from '../../molecules/HackerNewsListing'
 import { GlobalContext } from '../../../store/context'
-import { Header } from '../../molecules/Header/Header'
+import { Header } from '../../molecules/Header'
 
 import './hackerNews.scss'
 
@@ -32,8 +32,6 @@ export const HackerNews = () => {
     const hideItem = hits.filter((itm) => itm.objectID !== id)
     sethits(hideItem)
   }
-
-  var type = 'Line'
 
   const labels = hits.map((item) => item.objectID)
   const series = hits.map((itm) => itm.points)
@@ -80,7 +78,7 @@ export const HackerNews = () => {
           Next
         </button>
       </div>
-      <ChartistGraph data={graphData} options={options} type={type} />
+      <ChartistGraph data={graphData} options={options} type={'Line'} />
     </>
   )
 }

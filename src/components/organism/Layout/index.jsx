@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import '../../../styles/styles.scss'
 
 export const Layout = ({ children }) => {
-  return <main>{children}</main>;
-};
+  return <main>{children}</main>
+}
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([
@@ -14,4 +14,4 @@ Layout.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]).isRequired,
-};
+}

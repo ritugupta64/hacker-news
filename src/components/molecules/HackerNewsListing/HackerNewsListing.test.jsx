@@ -2,7 +2,7 @@ import React from 'react'
 import { render, cleanup } from '@testing-library/react'
 
 import { GlobalContextProvider } from '../../../store/context'
-import { HackerNewsListing } from './HackerNewsListing'
+import { HackerNewsListing } from '.'
 
 const dispatch = jest.fn()
 
