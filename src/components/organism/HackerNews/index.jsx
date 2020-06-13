@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import ChartistGraph from 'react-chartist'
-import fetch from 'isomorphic-fetch'
 
 import { HACKER_NEWS } from '../../../API'
 import { HackerNewsListing } from '../../molecules/HackerNewsListing'
