@@ -1,9 +1,20 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import App from './App'
+import {GlobalContextProvider} from './store/context'
+import {HackerRank} from './components/templates/HackerRank'
 
-it('match snapshot', () => {
-  const { asFragment } = render(<App />)
+const dispatch = jest.fn()
+
+const initialState = {
+  character: [],
+}
+
+it('renders', () => {
+  const { asFragment } = render(
+    <GlobalContextProvider data={{ state: initialState, dispatch }}>
+      <HackerRank />
+    </GlobalContextProvider>
+  )
   expect(asFragment()).toMatchSnapshot()
 })
