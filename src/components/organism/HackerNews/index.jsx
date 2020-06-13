@@ -26,7 +26,6 @@ export const HackerNews = () => {
       .then((data) => {
         sethits(data?.hits)
       })
-      .catch(err => console.log('error', err))
   }, [loadItems])
 
   const hide = (id) => {
