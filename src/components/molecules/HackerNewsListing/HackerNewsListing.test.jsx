@@ -46,7 +46,7 @@ describe('Hacker news listing component', () => {
   it('should have a listing when data is available', () => {
     const { container } =  render(
         <GlobalContextProvider data={{ state: initialState, dispatch }}>
-          <HackerNewsListing news={news} hide={news} />
+          <HackerNewsListing news={news} hide={hide} />
         </GlobalContextProvider>
       )
     expect(container.querySelector('h2')).toBeTruthy()
