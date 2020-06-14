@@ -37,7 +37,7 @@ export const HackerNews = () => {
   const series = hits.map((itm) => itm.points)
 
   let graphData = {
-    labels: labels,
+    labels: [labels],
     series: [series],
   }
 

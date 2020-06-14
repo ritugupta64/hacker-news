@@ -80,9 +80,36 @@ describe('render a view component', () => {
     expect(container.querySelector('.article__points')).toBeTruthy()
     expect(container.querySelector('.article__up-vote')).toBeTruthy()
     expect(container.querySelector('.article__creation-details')).toBeTruthy()
-    expect(container.querySelector('.article__external-url')).toBeTruthy()
     expect(container.querySelector('.article__author')).toBeTruthy()
     expect(container.querySelector('.article__date')).toBeTruthy()
     expect(container.querySelector('.article__btn-hide')).toBeTruthy()
+  })
+})
+
+const newsWithoutUrl = [
+  {
+    created_at: '2017-02-23T13:01:08.000Z',
+    title: 'Announcing the first SHA-1 collision',
+    author: 'pfg',
+    points: 3030,
+    comment_text: null,
+    num_comments: 485,
+    objectID: '13713480',
+  }
+]
+
+describe('render a view component without external url', () => {
+  let result
+  beforeEach(() => {
+    result = render(
+      <GlobalContextProvider data={{ state: initialState, dispatch }}>
+        <HackerNewsListingView newsView={newsWithoutUrl} hideItem={hideItem} />
+      </GlobalContextProvider>
+    )
+  })
+
+  it('should not have url class', () => {
+    const { container } = result
+    expect(container.querySelector('.article__external-url')).toBeFalsy()
   })
 })
