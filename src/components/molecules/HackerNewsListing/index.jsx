@@ -39,6 +39,6 @@ export const HackerNewsListing = ({ news, hide }) => {
 }
 
 HackerNewsListing.propTypes = {
-  news: PropTypes.array,
+  news: PropTypes.PropTypes.arrayOf(PropTypes.shape()),
   hide: PropTypes.func,
 }
