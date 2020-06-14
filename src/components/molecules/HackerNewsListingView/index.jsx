@@ -63,11 +63,13 @@ const Summary = ({ created_at, author, hideItem, title, url }) => {
     <div className="article__creation-details">
       <Heading headingtype="h2">{title}&nbsp;</Heading>
 
-      <small className="article__external-url">
-        <a href={url} rel="noopener noreferrer" target="_blank">
-          ({getDomain(url)})
-        </a>
-      </small>
+      {url ? (
+        <small className="article__external-url">
+          <a href={url} rel="noopener noreferrer" target="_blank">
+            ({getDomain(url)})
+          </a>
+        </small>
+      ) : null}
       <address className="article__author">&nbsp;by {author}</address>
       <time className="article__date"> {timeStampConvertor(created_at)}</time>
       <button className="article__btn-hide" type="button" onClick={hideItem}>
