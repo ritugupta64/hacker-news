@@ -23,7 +23,7 @@ export const HackerNewsListing = ({ news, hide }) => {
 
   return news && news.length > 0 ? (
     news.map((item, idx) =>
-      item.title ? (
+     !localStorage.getItem(`${item.objectID}_hide`) && item.title ? (
         <HackerNewsListingView
           key={item.objectID}
           newsView={item}

@@ -17,7 +17,6 @@ export const HackerNews = () => {
   const [loadItems, setLoadItems] = useState(page)
 
   useEffect(() => {
-    let getData = true
     fetch(`${HACKER_NEWS}?page=${loadItems}`)
       .then(function (response) {
         if (response.status >= 400) {
@@ -26,18 +25,13 @@ export const HackerNews = () => {
         return response.json()
       })
       .then((data) => {
-        if(getData){
-          sethits(data?.hits)
-        }
-       
+        sethits(data?.hits)
       })
-      return () => {
-        getData = false
-      }
   }, [loadItems])
 
   const hide = (id) => {
     const hideItem = hits.filter((itm) => itm.objectID !== id)
+    localStorage.setItem(`${id}_hide`, true)
     sethits(hideItem)
   }
 
