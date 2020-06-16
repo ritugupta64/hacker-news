@@ -17,6 +17,7 @@ export const HackerNews = () => {
   const [loadItems, setLoadItems] = useState(page)
 
   useEffect(() => {
+    let getData = true
     fetch(`${HACKER_NEWS}?page=${loadItems}`)
       .then(function (response) {
         if (response.status >= 400) {
@@ -25,8 +26,14 @@ export const HackerNews = () => {
         return response.json()
       })
       .then((data) => {
-        sethits(data?.hits)
+        if(getData){
+          sethits(data?.hits)
+        }
+       
       })
+      return () => {
+        getData = false
+      }
   }, [loadItems])
 
   const hide = (id) => {
